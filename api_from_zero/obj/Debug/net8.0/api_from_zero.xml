@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>api_from_zero</name>
+    </assembly>
+    <members>
+        <member name="M:api_from_zero.Controllers.AccountController.Registration(api_from_zero.ViewModels.RegistrationRequest)">
+            <summary>
+            Метод регистрации пользователей
+            </summary>
+            <param name="request"> RegistrationRequest </param>
+            <returns>RegistrationResponse</returns>
+        </member>
+        <member name="T:api_from_zero.Migrations.InitialMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:api_from_zero.Migrations.InitialMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:api_from_zero.Migrations.InitialMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:api_from_zero.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

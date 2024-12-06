@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_from_zero.Controllers
 {
@@ -17,7 +18,7 @@ namespace api_from_zero.Controllers
         public IActionResult Index(string username="user")
         {
             ClaimsPrincipal user = HttpContext.User;
-            return Ok("Вы в системе");
+            return View();
         }
         [Authorize(JwtBearerDefaults.AuthenticationScheme,Policy ="Admin")]
         public IActionResult Test()

@@ -1,12 +1,22 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
 using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddMvc();
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(
+    options =>
+    {
+        var xmlfilename=$"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlfilename));
+    }
+    );
 //Очень важно какая схема по умолчанию установлена!!!!
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie()
      .AddJwtBearer(options =>
@@ -26,11 +36,15 @@ builder.Services.AddAuthorization(options =>
 options.AddPolicy("Admin", police => police.RequireRole("Admin"))
 
 );
+builder.Services.AddDbContext<api_from_zero.Models.AppContext>(
+    dbOptions => dbOptions.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
 app.MapControllerRoute(
